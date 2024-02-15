@@ -10,7 +10,7 @@ public class Splash extends JFrame {
 	private static String downloadUrl = "http://rsps.dansearle.cloud/client/client.jar";
 	private static String fileName = "Client.jar";
 	private static String serverName = "Necrotic";
-	private static String backgroundImageUrl = "http://rsps.dansearle.cloud/images/0.png"; //"http://somelink.com/images/splash.png";
+	private static String backgroundImageUrl = "http://rsps.dansearle.cloud/images/0.png";
 	private static String saveDirectory = "Clients";
 	private static String currentLoaderVersion = "http://rsps.dansearle.cloud/loader/loader_version.txt";
 	private static double loaderVersion = 5.0;
@@ -68,22 +68,23 @@ public class Splash extends JFrame {
 			e1.printStackTrace();
 		}
         
-        imglabel = new JLabel(img);
-        add(imglabel);
+//        imglabel = new JLabel(img);
+//        add(imglabel);
         setLayout(null);
-        pbar = new JProgressBar();
-        pbar.setMinimum(0);
-        pbar.setMaximum(100);
-        pbar.setStringPainted(true);
-        pbar.setForeground(Color.LIGHT_GRAY);
-        imglabel.setBounds(0, 0, 543, 391);
-        add(pbar);
-        pbar.setPreferredSize(new Dimension(310, 30));
-        pbar.setBounds(70, 320, 404, 20);
-        
-        try {
+//        pbar = new JProgressBar();
+//        pbar.setMinimum(0);
+//        pbar.setMaximum(100);
+//        pbar.setStringPainted(true);
+//        pbar.setForeground(Color.LIGHT_GRAY);
+//        imglabel.setBounds(0, 0, 543, 391);
+//        add(pbar);
+//        pbar.setPreferredSize(new Dimension(310, 30));
+//        pbar.setBounds(70, 320, 404, 20);
+		setBackground(new Color(1.0f,1.0f,1.0f,0.0f));
+
+		try {
         	if (getNewestLoaderVersion() > getCurrentLoaderVersion()) {
-        		pbar.setString("A new loader is available. Please download the latest loader.");
+//        		pbar.setString("A new loader is available. Please download the latest loader.");
         		if(Desktop.isDesktopSupported()) {
 					System.out.println("Attempting to open browser to: "+loaderUrl);
 				} else {
@@ -140,8 +141,8 @@ public class Splash extends JFrame {
             			dest.write(data, 0, numRead);
             			numWritten += numRead;
             			int percent = (int)(((double)numWritten / (double)length) * 100D);
-            			pbar.setValue(percent);
-            			pbar.setString(""+(percent < 99 ? "Downloading "+serverName+" - "+percent+"%" : "Complete")+"");
+//            			pbar.setValue(percent);
+//            			pbar.setString(""+(percent < 99 ? "Downloading "+serverName+" - "+percent+"%" : "Complete")+"");
             		}
             	} catch (Exception exception) {
             		exception.printStackTrace();
