@@ -7,18 +7,14 @@ import java.net.*;
  
 @SuppressWarnings("serial")
 public class Splash extends JFrame {
-
-
-	private static String downloadUrl = "http://necrotic.org/downloads/client/Necrotic.jar";
-	private static String fileName = "Necrotic.jar";
+	private static String downloadUrl = "http://rsps.dansearle.cloud/client/client.jar";
+	private static String fileName = "Client.jar";
 	private static String serverName = "Necrotic";
-	private static String backgroundImageUrl = "http://necrotic.org/images/loader.png"; //"http://somelink.com/images/splash.png";
-	private static String saveDirectory = (System.getProperty("user.home")+(System.getProperty("file.separator"))+("NecroticClients")+(System.getProperty("file.separator")));
-	private static String currentLoaderVersion = "http://necrotic.org/downloads/loader/LoaderVersion.txt";
+	private static String backgroundImageUrl = "http://rsps.dansearle.cloud/images/0.png"; //"http://somelink.com/images/splash.png";
+	private static String saveDirectory = "Clients";
+	private static String currentLoaderVersion = "http://rsps.dansearle.cloud/loader/loader_version.txt";
 	private static double loaderVersion = 5.0;
-	private static String loaderUrl = "http://necrotic.org/downloads/loader/";
-	//private static String saveDirectory = System.getProperty("user.home")+"/Desktop/";
-	 
+	private static String loaderUrl = "http://rsps.dansearle.cloud/loader";
 	public static URL url;
     private JLabel imglabel;
     private ImageIcon img;
@@ -38,26 +34,23 @@ public class Splash extends JFrame {
 	public double getCurrentLoaderVersion() {
 		return loaderVersion;
 	}
- 
+
+
+	public static String getLoaderDirectory() {
+		String loaderLoc = System.getProperty("user.home") + "/Necrotic/";
+		loaderLoc += saveDirectory + "/";
+		File settingDir = new File(loaderLoc);
+		if(!settingDir.exists()) {
+			settingDir.mkdirs();
+		}
+		return loaderLoc;
+	}
+
     public Splash() {
         super(serverName+" "+"Splash");
         
-        File file = new File(saveDirectory + fileName);
-        
-       File path = new File(saveDirectory);
-       
-       if (path.exists() && path.isFile()) {
-			path.delete();
-		}
-       
-       if(!path.exists()) {
-    	   try {
-    		   path.mkdir();
-    	   } catch (Exception e) {
-    		   e.printStackTrace();
-    	   }
-       }
-        
+        File file = new File(getLoaderDirectory() + fileName);
+
 		try {
 			url = new URL(downloadUrl);
 		} catch (MalformedURLException e) {
@@ -136,7 +129,7 @@ public class Splash extends JFrame {
             	URLConnection download;
             	InputStream readFileToDownload = null;
             	try {
-            		dest = new BufferedOutputStream(new FileOutputStream(saveDirectory + fileName)); 
+            		dest = new BufferedOutputStream(new FileOutputStream(file));
             		download = url.openConnection();
             		readFileToDownload = download.getInputStream();
             		byte[] data = new byte[1024];
@@ -181,7 +174,7 @@ public class Splash extends JFrame {
      */
     public static void startApplication() {
     	try {
-			Runtime.getRuntime().exec("java -jar "+(saveDirectory + fileName)+"");
+			Runtime.getRuntime().exec("java -jar "+(getLoaderDirectory() +  fileName)+"");
 			Thread.sleep(1000L);
 			System.exit(0);
 		} catch (IOException | InterruptedException e) {
